@@ -31,12 +31,11 @@ export class DefaultController extends Controller {
 
     @Worker()
     async getTweet() {
-        // return jsonResult(this.service.getTweetsById(
-        //     await this.session.get(SESSION.UserId),
-        //     null,
-        //     null
-        // ));
-        return jsonResult(tweets);
+        return jsonResult(this.service.getTweetsById(
+            await this.session.get(SESSION.UserId),
+            null,
+            null
+        ));
     }
 
     @Worker()
