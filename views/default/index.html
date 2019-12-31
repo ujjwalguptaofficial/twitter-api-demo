@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Twitter Top App</title>
+</head>
+
+<body>
+
+    {{if(options.isLoggedIn)}}
+    <div>
+        {{if(options.tweets.length>0)}}
+        <form class="search-container" method="POST">
+            <select name="searchBy">
+                <option value="hashtag">HashTag</option>
+                <option value="place">Place</option>
+            </select>
+            <input name="searchText" type="text" placeholder="Search tweets by hashtag" />
+            <button type="submit">Submit</button>
+        </form>
+        <div>
+            {{each(options.tweets)}}
+            <div class="tweet-content">
+                <div class="user-info">
+                    <span class="user-name">{{@this | tweet_user_name}}</span>
+                    <img src="{{@this | tweet_user_profile_img}}" />
+                </div>
+                <div class="tweet-text">
+                    {{@this | tweet_text}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{#else}}
+        <div>
+            <h2>No tweets found</h2>
+            <p style="text-align: center;">
+                <a href="/logout">Logout</a>
+            </p>
+        </div>
+        {{/if}}
+    </div>
+    {{#else}}
+    <p class="link-container">
+        <a href="/auth/twitter">Login using twitter</a>
+    </p>
+    {{/if}}
+    <style>
+        .link-container {
+            text-align: center;
+        }
+
+        .tweet-content {
+            margin-top: 20px;
+            border: 1px solid;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 5px;
+        }
+
+        .tweet-text img {
+            margin-top: 20px;
+        }
+
+        .user-info {
+            line-height: 50px;
+        }
+
+        .user-name {
+            vertical-align: top;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .search-container {
+            text-align: center;
+        }
+
+        .search-container input {
+            height: 40px;
+            width: 300px;
+            border-radius: 5px;
+            ;
+        }
+    </style>
+
+</body>
+
+</html>
